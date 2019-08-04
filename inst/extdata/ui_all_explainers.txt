@@ -1,0 +1,8 @@
+,
+  tabPanel('All',
+           withSpinner(plotOutput('CeterisParibus1'), color = '#4a3c89'),
+           withSpinner(plotOutput('BreakDown1'), color = '#4a3c89'),
+           withSpinner(plotOutput('Shapley1'), color = '#4a3c89'),
+           withSpinner(plotOutput('shapeR1'), color = '#4a3c89'),
+           withSpinner(plotOutput('LocalModel1'), color = '#4a3c89'),
+           withSpinner(plotOutput('Lime1'), color = '#4a3c89'))
