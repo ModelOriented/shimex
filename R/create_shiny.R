@@ -7,6 +7,7 @@
 #' @param new_obs --
 #' @param selected_variables --
 #' @param all --
+#'
 
 create_shiny <- function(explainer, data = NULL, new_obs = NULL, selected_variables = NULL, all = F){
 
@@ -29,10 +30,9 @@ create_shiny <- function(explainer, data = NULL, new_obs = NULL, selected_variab
   ui <- create_ui(factor_vars, cont_vars, all)
   server <- create_server(factor_vars, cont_vars)
   global <- paste(readLines(system.file("extdata", "global.txt", package = "shimex")), collapse = '\n')
-  # TODO:: w paczce będzie inaczej http://r-pkgs.had.co.nz/data.html
   www <- paste(readLines(system.file("extdata", "style.txt", package = "shimex")), collapse = '\n')
 
-  write_files(mainDir, ui, server, global, www)
+  .write_files(mainDir, ui, server, global, www)
 
 
   # ---- to remove

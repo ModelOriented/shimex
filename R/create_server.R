@@ -21,7 +21,7 @@ create_server <- function(factor_vars, cont_vars){
           })
 
          observation <- reactive({
-            o <- ", create_observation(factor_vars, cont_vars), "
+            o <- ", .create_observation(factor_vars, cont_vars), "
           observation <-  o[, colnames(data)[-1]]
          }) \n
          ",
@@ -50,7 +50,7 @@ create_server <- function(factor_vars, cont_vars){
 #' @param factor_vars vector of strings containing names of factor variables.
 #' @param cont_vars vector of strings containing names of continous variables.
 
-create_observation <- function( factor_vars, cont_vars){
+.create_observation <- function( factor_vars, cont_vars){
 
   cont <- sprintf( "%1$s = as.numeric(input$%1$s)" , cont_vars)
   factors <- sprintf("%1$s = factor(input$%1$s, levels = levels(data$%1$s))" , factor_vars)
