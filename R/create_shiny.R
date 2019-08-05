@@ -21,7 +21,7 @@ create_shiny <- function(explainer, data = NULL, new_obs = NULL, selected_variab
   cont_vars <- colnames(data)[sapply(data, is.numeric)]
 
   if(is.null(new_obs)) new_obs <- data.frame(data[1, ])
-  if(is.null(selected_variables)) selected_variables <- colnames(data)[1:min(ncol(data), 5)] # TODO:: spr czy ma wg 5
+  if(is.null(selected_variables)) selected_variables <- colnames(data)[1:min(ncol(data), 5)]
   #
 
   save(file = file.path(mainDir, 'data.RData'),
