@@ -3,9 +3,19 @@ Type: Package
 Title: Shiny Models Explorer
 Version: 0.1.0
 Authors@R: c(person("Monika", "Chudek", email = "monika.chudek1@gmail.com", role = c("aut", "cre")))
-Description: Visualization of model's local explainers using Shiny App.
-  An app allows interactive exploration of models based on local explainers.
+Description: Shimex generates Shiny App that enables interactive model exploration.
+  An app visualizes local explainers such as: CeterisParibus, iBreakDown, Shap, Shaper and Local Model.
 License: GPL
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
+Imports: 
+    shiny,
+    shinyjs,
+    ingredients,
+    iBreakDown,
+    localModel,
+    DALEX,
+    shapper,
+    shinycssloaders,
+    iml

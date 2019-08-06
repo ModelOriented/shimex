@@ -6,14 +6,25 @@
 #' @param data --
 #' @param new_obs --
 #' @param selected_variables --
-#' @param all --
+#' @param all logical value. If TRUE, then extra tab is displayed showing all explainers,
+#' @param main_dir string, path where shiny files should be stored.
+#' @param delete logical value, if TRUE shiny files are deleted on exit of function.
+#'
+#' @example
+#' library(randomForest)
+#' model_rm <- randomForest(life_length ~., data = DALEX2::dragons, ntree = 200)
+#' explainer <- DALEX::explain(model_rm)
+#' create_shiny(explainer)
+#'
+#' @export
 #'
 
-create_shiny <- function(explainer, data = NULL, new_obs = NULL, selected_variables = NULL, all = F){
+create_shiny <- function(explainer, data = NULL, new_obs = NULL, selected_variables = NULL, all = FALSE,
+                         main_dir = NULL, delete = TRUE){
 
   # create main folder
-  mainDir <- tempdir()
-  if(!dir.exists(mainDir)) dir.create(file.path(mainDir))
+  if(is.null(main_dir)) main_dir <- tempdir()
+  if(!dir.exists(main_dir)) dir.create(file.path(main_dir))
 
   # prepare data
   if(is.null(data)) data <- explainer$data[, -1]
@@ -24,7 +35,7 @@ create_shiny <- function(explainer, data = NULL, new_obs = NULL, selected_variab
   if(is.null(selected_variables)) selected_variables <- colnames(data)[1:min(ncol(data), 5)]
   #
 
-  save(file = file.path(mainDir, 'data.RData'),
+  save(file = file.path(main_dir, 'data.RData'),
        list = c('explainer', 'new_obs', 'selected_variables'))
 
   ui <- create_ui(factor_vars, cont_vars, all)
@@ -32,16 +43,10 @@ create_shiny <- function(explainer, data = NULL, new_obs = NULL, selected_variab
   global <- paste(readLines(system.file("extdata", "global.txt", package = "shimex")), collapse = '\n')
   www <- paste(readLines(system.file("extdata", "style.txt", package = "shimex")), collapse = '\n')
 
-  .write_files(mainDir, ui, server, global, www)
+  .write_files(main_dir, ui, server, global, www)
 
 
-  # ---- to remove
-  # write_files('C:\\Users\\Lenovo\\Documents\\mgr\\model_explorer_example', ui, server, global, www)
-  # save(file = file.path('C:\\Users\\Lenovo\\Documents\\mgr\\model_explorer_example', 'data.RData'),
-  #     list = c('explainer', 'new_obs', 'selected_variables'))
-  ###
+  shiny::runApp(main_dir)
 
-
-  shiny::runApp(mainDir)
-  unlink(mainDir, recursive = TRUE)
+  if(delete) unlink(main_dir, recursive = TRUE)
 }
