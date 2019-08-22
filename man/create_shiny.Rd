@@ -4,19 +4,21 @@
 \alias{create_shiny}
 \title{create Shiny App for Exploring Model}
 \usage{
-create_shiny(explainer, data = NULL, new_obs = NULL,
-  selected_variables = NULL, all = F)
+create_shiny(explainer, new_obs = NULL, selected_variables = NULL,
+  all = FALSE, main_dir = NULL, delete = TRUE)
 }
 \arguments{
-\item{explainer}{DALEX}
-
-\item{data}{--}
+\item{explainer}{explainer created with function `DALEX::explain()`}
 
 \item{new_obs}{--}
 
 \item{selected_variables}{--}
 
-\item{all}{--}
+\item{all}{logical value. If TRUE, then extra tab is displayed showing all explainers,}
+
+\item{main_dir}{string, path where shiny files should be stored.}
+
+\item{delete}{logical value, if TRUE shiny files are deleted on exit of function.}
 }
 \description{
 creates files for Shiny App

@@ -2,8 +2,7 @@
 #'
 #' creates files for Shiny App
 #'
-#' @param explainer DALEX
-#' @param data --
+#' @param explainer explainer created with function `DALEX::explain()`
 #' @param new_obs --
 #' @param selected_variables --
 #' @param all logical value. If TRUE, then extra tab is displayed showing all explainers,
@@ -19,7 +18,7 @@
 #' @export
 #'
 
-create_shiny <- function(explainer, data = NULL, new_obs = NULL, selected_variables = NULL, all = FALSE,
+create_shiny <- function(explainer, new_obs = NULL, selected_variables = NULL, all = FALSE,
                          main_dir = NULL, delete = TRUE){
 
   # create main folder
@@ -27,7 +26,7 @@ create_shiny <- function(explainer, data = NULL, new_obs = NULL, selected_variab
   if(!dir.exists(main_dir)) dir.create(file.path(main_dir))
 
   # prepare data
-  if(is.null(data)) data <- explainer$data[, -1]
+  data <- explainer$data[, -1]
   factor_vars <- colnames(data)[sapply(data, is.factor)]
   cont_vars <- colnames(data)[sapply(data, is.numeric)]
 
@@ -38,10 +37,10 @@ create_shiny <- function(explainer, data = NULL, new_obs = NULL, selected_variab
   save(file = file.path(main_dir, 'data.RData'),
        list = c('explainer', 'new_obs', 'selected_variables'))
 
-  ui <- create_ui(factor_vars, cont_vars, all)
-  server <- create_server(factor_vars, cont_vars)
-  global <- paste(readLines(system.file("extdata", "global.txt", package = "shimex")), collapse = '\n')
-  www <- paste(readLines(system.file("extdata", "style.txt", package = "shimex")), collapse = '\n')
+  ui <- .create_ui(factor_vars, cont_vars, all)
+  server <- .create_server(factor_vars, cont_vars)
+  global <- .create_global()
+  www <- .create_www()
 
   .write_files(main_dir, ui, server, global, www)
 

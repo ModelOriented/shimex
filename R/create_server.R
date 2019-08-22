@@ -4,10 +4,9 @@
 #'
 #' @param factor_vars vector of strings containing names of factor variables.
 #' @param cont_vars vector of strings containing names of continous variables.
-#'
 
 
-create_server <- function(factor_vars, cont_vars){
+.create_server <- function(factor_vars, cont_vars){
 
   str_explainers <- "
   output$CeterisParibus%1$s <- renderPlot({
@@ -107,7 +106,6 @@ create_server <- function(factor_vars, cont_vars){
 
 # helper for create_server
 # returns string defining data.frame for current searched observation.
-
 .create_observation <- function( factor_vars, cont_vars){
 
   cont <- sprintf( "%1$s = as.numeric(input$%1$s)" , cont_vars)

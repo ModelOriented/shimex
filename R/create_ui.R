@@ -6,7 +6,7 @@
 #' @param cont_vars vector of strings containing names of continous variables.
 #' @param all logical values, if TRUE extra tab is creating showing all explainers together.
 
-create_ui <- function(factor_vars, cont_vars, all){
+.create_ui <- function(factor_vars, cont_vars, all){
 
   body <- "
   library(shiny)
@@ -66,7 +66,8 @@ create_ui <- function(factor_vars, cont_vars, all){
         )
       )
     ) # -- sidebarLayout
-  ) # --fluidPage) # -- shinyUI"
+  ) # --fluidPage
+) # -- shinyUI"
 
   all_expl_ui <- if(all) {
     ",
