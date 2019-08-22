@@ -3,7 +3,7 @@
 #' creates files for Shiny App
 #'
 #' @param explainer explainer created with function `DALEX::explain()`
-#' @param new_obs --
+#' @param new_obs a new observation with columns that corresponds to variables used in the model
 #' @param selected_variables --
 #' @param all logical value. If TRUE, then extra tab is displayed showing all explainers,
 #' @param main_dir string, path where shiny files should be stored.
@@ -23,7 +23,8 @@ create_shiny <- function(explainer, new_obs = NULL, selected_variables = NULL, a
 
   # create main folder
   if(is.null(main_dir)) main_dir <- tempdir()
-  if(!dir.exists(main_dir)) dir.create(file.path(main_dir))
+  main_dir <- file.path(main_dir, 'shimex')
+  if(!dir.exists(main_dir)) dir.create(main_dir)
 
   # prepare data
   data <- explainer$data[, -1]
