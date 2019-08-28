@@ -9,11 +9,13 @@
 #' @param main_dir string, path where shiny files should be stored.
 #' @param delete logical value, if TRUE shiny files are deleted on exit of function.
 #'
-#' @example
+#' @examples
+#' \dontrun{
 #' library(randomForest)
 #' model_rm <- randomForest(life_length ~., data = DALEX2::dragons, ntree = 200)
 #' explainer <- DALEX::explain(model_rm)
 #' create_shiny(explainer)
+#' }
 #'
 #' @export
 #'

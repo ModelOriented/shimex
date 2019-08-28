@@ -10,7 +10,7 @@ create_shiny(explainer, new_obs = NULL, selected_variables = NULL,
 \arguments{
 \item{explainer}{explainer created with function `DALEX::explain()`}
 
-\item{new_obs}{--}
+\item{new_obs}{a new observation with columns that corresponds to variables used in the model}
 
 \item{selected_variables}{--}
 
@@ -22,4 +22,13 @@ create_shiny(explainer, new_obs = NULL, selected_variables = NULL,
 }
 \description{
 creates files for Shiny App
+}
+\examples{
+\dontrun{
+library(randomForest)
+model_rm <- randomForest(life_length ~., data = DALEX2::dragons, ntree = 200)
+explainer <- DALEX::explain(model_rm)
+create_shiny(explainer)
+}
+
 }
