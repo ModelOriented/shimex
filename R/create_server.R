@@ -23,11 +23,14 @@
 
   output$CeterisParibus_factor%1$s <- renderPlot({
 
-  p <- plot(pred_cp(),
-            variables = c('", paste0(factor_vars, collapse = "', '"), "'),
-            only_numerical  = F)
+  factor_vars_str <- c('", paste0(factor_vars, collapse = "', '"),"')
 
-    return(p)
+  if(factor_vars_str[1] == '') return(NULL)
+  else { p <- plot(pred_cp(),
+            variables = factor_vars_str,
+            only_numerical  = F)
+        return(p)
+       }
   })
 
 
