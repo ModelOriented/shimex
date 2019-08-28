@@ -8,13 +8,24 @@
 
 .create_server <- function(factor_vars, cont_vars){
 
-  str_explainers <- "
-  output$CeterisParibus%1$s <- renderPlot({
+  str_explainers <- paste0("
+    pred_cp <- reactive({
+      ingredients::ceteris_paribus(explainer,
+                             new_observation = observation())
+      })
 
-    pred_cp <- ingredients::ceteris_paribus(explainer,
-                                            new_observation = observation())
-    p <- plot(pred_cp) +
-         ingredients::show_observations(pred_cp)
+   output$CeterisParibus <- renderPlot({
+   p <- plot(pred_cp()) +
+   ingredients::show_observations(pred_cp())
+
+   return(p)
+   })
+
+  output$CeterisParibus_factor%1$s <- renderPlot({
+
+  p <- plot(pred_cp(),
+            variables = c('", paste0(factor_vars, collapse = "', '"), "'),
+            only_numerical  = F)
 
     return(p)
   })
@@ -35,7 +46,7 @@
                                                               new_observation = observation(),
                                                               size = 500)
     p <- plot(pred_localModel) +
-         DALEX::theme_drwhy()
+         ingredients::theme_drwhy()
 
     return(p)
   })
@@ -46,7 +57,7 @@
     shapley%1$s <- Shapley$new(predictor,
                                x.interest = observation())
     p <- shapley$plot() +
-         DALEX::theme_drwhy()
+         ingredients::theme_drwhy()
 
     return(p)
   })
@@ -60,7 +71,7 @@
 
   output$Lime%1$s <- renderPlot({
     p <- plot(lime.explain()) +
-         DALEX::theme_drwhy()
+         ingredients::theme_drwhy()
     return(p)
   })
 
@@ -70,7 +81,7 @@
                                                   new_observation = observation())
 
    plot(shaper)
-  })"
+  })")
 
   paste("library(shiny)
 

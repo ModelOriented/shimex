@@ -37,17 +37,28 @@
           'Model Explorer',
           position = 'fixed-top',
           inverse = T,
+
           tabPanel('CeterisParibus',
-            withSpinner(plotOutput('CeterisParibus'),
-            color = '#4a3c89')),
+           h4('Numerical Variables'),
+           br(),
+            withSpinner(plotOutput('CeterisParibus'), color = '#4a3c89'),
+           h4('Factor Variables'),
+           br(),
+            withSpinner(plotOutput('CeterisParibus_factor'), color = '#4a3c89'),
+           br()),
+
           tabPanel('BreakDown',
             withSpinner(plotOutput('BreakDown'), color = '#4a3c89')),
+
           tabPanel('Shap',
             withSpinner(plotOutput('Shapley'), color = '#4a3c89')),
+
           tabPanel('shapeR',
             withSpinner(plotOutput('shapeR'), color = '#4a3c89')),
+
           tabPanel('Localmodel',
             withSpinner(plotOutput('LocalModel'), color = '#4a3c89')),
+
           tabPanel(
             'Lime',
              tags$div(
