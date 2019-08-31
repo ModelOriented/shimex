@@ -39,13 +39,18 @@
           inverse = T,
 
           tabPanel('CeterisParibus',
-           h4('Numerical Variables'),
+                   div(
+                     column(10, h4('Numerical Variables')),
+                     column(2,actionButton('decribe_cp', 'Describe Plots'))
+                   ),
            br(),
             withSpinner(plotOutput('CeterisParibus'), color = '#4a3c89'),
+           br(),
            h4('Factor Variables'),
            br(),
             withSpinner(plotOutput('CeterisParibus_factor'), color = '#4a3c89'),
-           br()),
+           br()
+           ),
 
           tabPanel('BreakDown',
             withSpinner(plotOutput('BreakDown'), color = '#4a3c89')),
@@ -74,7 +79,8 @@
             fluidRow(withSpinner(plotOutput('Lime'), color = '#4a3c89'))
           )
           %s
-        )
+        ),
+        shinyBS::bsModal('describe_cp', 'Ceteris Paribus Description', 'decribe_cp', htmlOutput('CP_describe'))
       )
     ) # -- sidebarLayout
   ) # --fluidPage

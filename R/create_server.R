@@ -33,6 +33,15 @@
        }
   })
 
+  output$CP_describe <- renderUI({
+
+    d <- describe(pred_cp())
+    d <- gsub('*', '', d, fixed = T)
+    d <- gsub('\n', '<br>', d, fixed = T)
+    d <- paste0(d, collapse = '<br>')
+    HTML(d)
+
+  })
 
   output$BreakDown%1$s <- renderPlot({
 

@@ -14,7 +14,6 @@
 }
 
 
-
 .create_www <- function(){
 
   www <- "
@@ -48,5 +47,13 @@
 
   if(!dir.exists(file.path(mainDir, '/www'))) dir.create(file.path(mainDir, '/www'))
   write(www, file.path(mainDir, '/www/style.css'))
+
+}
+
+
+.prepare_description_to_display <- function(d){
+
+  d <- gsub("*", "**", d, fixed = T)
+  l <- gsub("\n", "<br>", d, fixed = T)
 
 }
