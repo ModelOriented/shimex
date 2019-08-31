@@ -18,4 +18,5 @@ Imports:
     DALEX,
     shapper,
     shinycssloaders,
-    iml
+    iml,
+    shinyBS

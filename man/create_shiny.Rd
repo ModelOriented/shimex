@@ -26,7 +26,7 @@ creates files for Shiny App
 \examples{
 \dontrun{
 library(randomForest)
-model_rm <- randomForest(life_length ~., data = DALEX2::dragons, ntree = 200)
+model_rm <- randomForest(life_length ~., data = DALEX::dragons, ntree = 200)
 explainer <- DALEX::explain(model_rm)
 create_shiny(explainer)
 }

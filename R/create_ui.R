@@ -40,9 +40,9 @@
 
           tabPanel('CeterisParibus',
                    div(
-                     column(10, h4('Numerical Variables')),
-                     column(2,actionButton('decribe_cp', 'Describe Plots'))
-                   ),
+                     column(8, h4('Numerical Variables')),
+                     column(4, actionButton('decribe_cp', 'Describe Plots'), align = 'right')
+                      ),
            br(),
             withSpinner(plotOutput('CeterisParibus'), color = '#4a3c89'),
            br(),
@@ -53,6 +53,7 @@
            ),
 
           tabPanel('BreakDown',
+            p(actionButton('decribe_bd', 'Describe Plot'), align = 'right'),
             withSpinner(plotOutput('BreakDown'), color = '#4a3c89')),
 
           tabPanel('Shap',
@@ -80,7 +81,8 @@
           )
           %s
         ),
-        shinyBS::bsModal('describe_cp', 'Ceteris Paribus Description', 'decribe_cp', htmlOutput('CP_describe'))
+          bsModal('describe_cp', 'Ceteris Paribus Description', 'decribe_cp', htmlOutput('CP_describe')),
+          bsModal('describe_bd', 'Ceteris Paribus Description', 'decribe_bd', htmlOutput('BD_describe'))
       )
     ) # -- sidebarLayout
   ) # --fluidPage

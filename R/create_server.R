@@ -43,13 +43,23 @@
 
   })
 
-  output$BreakDown%1$s <- renderPlot({
+  pred_bd <- reactive({
+    iBreakDown::local_attributions(explainer,
+                           new_observation = observation())
+  })
 
-    pred_bd <- iBreakDown::local_attributions(explainer,
-                                              new_observation = observation())
-    p <- plot(pred_bd)
+   output$BreakDown <- renderPlot({
+     p <- plot(pred_bd())
+     return(p)
+   })
 
-    return(p)
+
+   output$BD_describe <- renderUI({
+     d <- iBreakDown::describe(pred_bd())
+     d <- gsub('*', '', d, fixed = T)
+     d <- gsub('\n', '<br>', d, fixed = T)
+     d <- paste0(d, collapse = '<br>')
+     HTML(d)
   })
 
   output$LocalModel%1$s <- renderPlot({

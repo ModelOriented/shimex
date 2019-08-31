@@ -4,6 +4,7 @@
   library(data.table)
   library(iml)
   library(shinycssloaders)
+  library(shinyBS)
 
   load('data.RData')
   data <- data.frame(explainer$data)
@@ -50,10 +51,3 @@
 
 }
 
-
-.prepare_description_to_display <- function(d){
-
-  d <- gsub("*", "**", d, fixed = T)
-  l <- gsub("\n", "<br>", d, fixed = T)
-
-}
