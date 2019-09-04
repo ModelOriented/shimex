@@ -6,7 +6,7 @@
 #' @param cont_vars vector of strings containing names of continous variables.
 
 
-.create_server <- function(factor_vars, cont_vars){
+.create_server <- function(factor_vars, cont_vars, all){
 
   str_explainers <- paste0("
     pred_cp <- reactive({
@@ -84,6 +84,16 @@
     return(p)
   })
 
+  output$Shap_iBD%1$s <- renderPlot({
+
+     shap_ib <- shap(explainer,
+                     new_observation = new_obs)
+     p <- plot(shap_ib) +
+     ingredients::theme_drwhy()
+
+     return(p)
+  })
+
 
   lime.explain <- reactive({
     LocalModel$new(predictor,
@@ -105,6 +115,9 @@
    plot(shaper)
   })")
 
+  all_tab <- ''
+  if(all) all_tab <- sprintf(str_explainers,'1')
+
   paste("library(shiny)
 
          shinyServer(function(input, output) {
@@ -124,8 +137,7 @@
          sprintf(str_explainers,
          ''),
         '\n',
-         sprintf( str_explainers,
-         '1'),
+         all_tab,
 
          "# -----
          onStop(function() {

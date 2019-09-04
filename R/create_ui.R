@@ -57,6 +57,10 @@
             withSpinner(plotOutput('BreakDown'), color = '#4a3c89')),
 
           tabPanel('Shap',
+            h4('iBreakDown package'),
+            withSpinner(plotOutput('Shap_iBD'), color = '#4a3c89'),
+            br(),
+            h4('iml package'),
             withSpinner(plotOutput('Shapley'), color = '#4a3c89')),
 
           tabPanel('shapeR',

@@ -41,7 +41,7 @@ create_shiny <- function(explainer, new_obs = NULL, selected_variables = NULL, a
        list = c('explainer', 'new_obs', 'selected_variables'))
 
   ui <- .create_ui(factor_vars, cont_vars, all)
-  server <- .create_server(factor_vars, cont_vars)
+  server <- .create_server(factor_vars, cont_vars, all)
   global <- .create_global()
   www <- .create_www()
 
