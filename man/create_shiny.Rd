@@ -5,14 +5,18 @@
 \title{create Shiny App for Exploring Model}
 \usage{
 create_shiny(explainer, new_obs = NULL, selected_variables = NULL,
-  all = FALSE, main_dir = NULL, delete = TRUE)
+  variable_order = NULL, all = FALSE, main_dir = NULL,
+  delete = TRUE)
 }
 \arguments{
 \item{explainer}{explainer created with function `DALEX::explain()`}
 
 \item{new_obs}{a new observation with columns that corresponds to variables used in the model}
 
-\item{selected_variables}{--}
+\item{selected_variables}{a vector of variable names that will be shown in input panel,}
+
+\item{variable_order}{a vector of variable names, that indicates order of displayed inputs.
+It is not sessecairly to define all varaible names here. Unlisted names will appear at the end of dispalyed list.}
 
 \item{all}{logical value. If TRUE, then extra tab is displayed showing all explainers,}
 

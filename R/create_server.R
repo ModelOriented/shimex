@@ -88,7 +88,7 @@
   output$Shap_iBD%1$s <- renderPlot({
 
      shap_ib <- iBreakDown::shap(explainer,
-                     new_observation = new_obs)
+                     new_observation = observation())
      p <- plot(shap_ib)
      return(p)
   })
