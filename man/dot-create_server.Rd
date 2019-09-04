@@ -10,6 +10,8 @@
 \item{factor_vars}{vector of strings containing names of factor variables.}
 
 \item{cont_vars}{vector of strings containing names of continous variables.}
+
+\item{all}{logical value. If TRUE, then extra tab is displayed showing all explainers}
 }
 \description{
 creates string for server.R file.

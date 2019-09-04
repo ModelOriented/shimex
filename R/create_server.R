@@ -4,6 +4,7 @@
 #'
 #' @param factor_vars vector of strings containing names of factor variables.
 #' @param cont_vars vector of strings containing names of continous variables.
+#' @param all logical value. If TRUE, then extra tab is displayed showing all explainers
 
 
 .create_server <- function(factor_vars, cont_vars, all){
