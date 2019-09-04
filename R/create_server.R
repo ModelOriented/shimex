@@ -68,7 +68,7 @@
                                                               new_observation = observation(),
                                                               size = 500)
     p <- plot(pred_localModel) +
-         ingredients::theme_drwhy()
+         DALEX::theme_drwhy()
 
     return(p)
   })
@@ -79,18 +79,16 @@
     shapley%1$s <- Shapley$new(predictor,
                                x.interest = observation())
     p <- shapley$plot() +
-         ingredients::theme_drwhy()
+         DALEX::theme_drwhy()
 
     return(p)
   })
 
   output$Shap_iBD%1$s <- renderPlot({
 
-     shap_ib <- shap(explainer,
+     shap_ib <- iBreakDown::shap(explainer,
                      new_observation = new_obs)
-     p <- plot(shap_ib) +
-     ingredients::theme_drwhy()
-
+     p <- plot(shap_ib)
      return(p)
   })
 
@@ -103,7 +101,7 @@
 
   output$Lime%1$s <- renderPlot({
     p <- plot(lime.explain()) +
-         ingredients::theme_drwhy()
+         DALEX::theme_drwhy()
     return(p)
   })
 
@@ -113,7 +111,17 @@
                                                   new_observation = observation())
 
    plot(shaper)
-  })")
+  })
+
+  output$Lime_ingr%1s <- renderPlot({
+    asp <- as.list(colnames(data[, -1]))
+    names(asp) <- colnames(data[, -1])
+
+    pred_lime <- ingredients::aspect_importance(explainer,
+                           new_observation = observation(),
+                           aspects = asp)
+    return(plot(pred_lime))
+})")
 
   all_tab <- ''
   if(all) all_tab <- sprintf(str_explainers,'1')

@@ -4,7 +4,7 @@
 \alias{.create_server}
 \title{creat server.R}
 \usage{
-.create_server(factor_vars, cont_vars)
+.create_server(factor_vars, cont_vars, all)
 }
 \arguments{
 \item{factor_vars}{vector of strings containing names of factor variables.}
