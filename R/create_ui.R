@@ -27,8 +27,7 @@
         ),
 
         tags$hr(),
-        %s % s
-        %s,
+    uiOutput('vars_input'),
         width = 3
       ), #-- sidebarPanel
 
@@ -109,9 +108,6 @@
   comma <- ifelse(length(factor_vars), ',', '')
 
   sprintf( body,
-           .create_inputs(factor_vars, .create_factor_input),
-           comma,
-           .create_inputs(cont_vars, .create_slider_input),
            all_expl_ui)
 }
 

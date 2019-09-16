@@ -7,9 +7,32 @@
 #' @param all logical value. If TRUE, then extra tab is displayed showing all explainers
 
 
-.create_server <- function(factor_vars, cont_vars, all){
+.create_server <- function(factor_vars, cont_vars, all, vars){
 
   str_explainers <- paste0("
+
+      output$vars_input <- renderUI({
+
+                           selected_columns <- input$selected_columns
+
+                           lapply(1:length(selected_columns), function(i){
+                           var_values <- data[, colnames(data) == selected_columns[i]]
+
+                           if(class(var_values) == 'factor'){
+                           selectInput(inputId = selected_columns[i],
+                           label = selected_columns[i],
+                           choices = levels(var_values),
+                           selected = observation()[[selected_columns[i]]])}
+                           else{
+                           sliderInput(inputId = selected_columns[i],
+                           label = selected_columns[i],
+                           min = round(min(var_values, na.rm = T)),
+                           max = round(max(var_values, na.rm = T)),
+                           value = observation()[[selected_columns[i]]])
+                           }
+                           })
+})
+
     pred_cp <- reactive({
       ingredients::ceteris_paribus(explainer,
                              new_observation = observation())
@@ -139,8 +162,11 @@
           })
 
          observation <- reactive({
-            o <- ", .create_observation(factor_vars, cont_vars), "
-          observation <-  o[, colnames(data)[-1]]
+            o <- ", .create_observation(vars), "
+          nulls <- sapply(o, function(x) length(x) == 0)
+          o[nulls] <- new_obs[nulls]
+
+        as.data.frame(o)
          }) \n
          ",
          sprintf(str_explainers,
@@ -159,14 +185,19 @@
 
 
 # helper for create_server
-# returns string defining data.frame for current searched observation.
-.create_observation <- function( factor_vars, cont_vars){
+# returns string defining list for current searched observation.
+.create_observation <- function(vars){
 
-  cont <- sprintf( "%1$s = as.numeric(input$%1$s)" , cont_vars)
-  factors <- sprintf("%1$s = factor(input$%1$s, levels = levels(data$%1$s))" , factor_vars)
-  cf <- c(cont, factors)
-  obstr <- paste(cf, collapse = ", ", '\n')
-  paste0("data.frame(", obstr,")")
+  t_vars <- as.data.frame(cbind(names = names(vars), type = vars))
+  t_vars$levels <- apply(t_vars, 1, function(x) paste0(', levels = levels(data$', x$`names`, ')'))
+  t_vars$levels[t_vars$type != 'factor']  <- ''
+  t_vars$as  <- ''
+  t_vars$as[t_vars$type != 'factor']  <- 'as.'
+
+  t <- apply(t_vars, 1, function(x) paste0(x$`names`, ' = ', x$`as` , x$`type` , '(input$', x$`names`, x$`levels`, ')'))
+
+  obstr <- paste(t, collapse = ", ", '\n')
+  paste0("list(", obstr,")")
 
 }
 

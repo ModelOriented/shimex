@@ -1,6 +1,6 @@
 #' create Shiny App for Exploring Model
 #'
-#' creates files for Shiny App
+#' creates files for Shiny App and runs Shiny.
 #'
 #' @param explainer explainer created with function `DALEX::explain()`
 #' @param new_obs a new observation with columns that corresponds to variables used in the model
@@ -41,6 +41,7 @@ create_shiny <- function(explainer, new_obs = NULL, selected_variables = NULL, i
 
   cont_vars <- colnames(data)[sapply(data, is.numeric)]
   cont_vars <- input_order[input_order %in% cont_vars]
+  vars <- lapply(data, class)
 
   if(is.null(new_obs)) new_obs <- data.frame(data[1, ])
   if(is.null(selected_variables)) selected_variables <- colnames(data)[1:min(ncol(data), 5)]
@@ -49,7 +50,7 @@ create_shiny <- function(explainer, new_obs = NULL, selected_variables = NULL, i
        list = c('explainer', 'new_obs', 'selected_variables'))
 
   ui <- .create_ui(factor_vars, cont_vars, all)
-  server <- .create_server(factor_vars, cont_vars, all)
+  server <- .create_server(factor_vars, cont_vars, all, vars)
   global <- .create_global()
   www <- .create_www()
 
