@@ -4,6 +4,7 @@
 #'
 #' @param explainer explainer created with function `DALEX::explain()`
 #' @param new_obs a new observation with columns that corresponds to variables used in the model
+#' @param data ---
 #' @param selected_variables a vector of variable names that will be shown in input panel,
 #' @param all logical value. If TRUE, then extra tab is displayed showing all explainers,
 #' @param main_dir string, path where shiny files should be stored.
@@ -14,13 +15,13 @@
 #' library(randomForest)
 #' model_rm <- randomForest(life_length ~., data = DALEX::dragons, ntree = 200)
 #' explainer <- DALEX::explain(model_rm)
-#' create_shiny(explainer, DALEX::dragons[1,])
+#' create_shimex(explainer,  DALEX::dragons[1, ])
 #' }
 #'
 #' @export
 #'
 
-create_shiny <- function(explainer, new_obs, selected_variables = NULL,
+create_shimex <- function(explainer, new_obs, data = explainer$data, selected_variables = NULL,
                          all = FALSE, main_dir = NULL, delete = TRUE){
 
   # create main folder
@@ -28,14 +29,15 @@ create_shiny <- function(explainer, new_obs, selected_variables = NULL,
   main_dir <- file.path(main_dir, 'shimex')
   if(!dir.exists(main_dir)) dir.create(main_dir)
 
-  # get predictors and response
+  # get predictors and response names
   vars <- all.vars(formula(explainer$model))
   predvars <- vars[-1]
   y_name <- vars[1]
 
   # prepare data
-  y <- explainer$data[, y_name]
-  data <- explainer$data[, predvars]
+  y <- data[, y_name]
+  data <- data[, predvars]
+  new_obs <- new_obs[, predvars]
 
   vars <- lapply(data, class)
 
@@ -44,8 +46,8 @@ create_shiny <- function(explainer, new_obs, selected_variables = NULL,
   save(file = file.path(main_dir, 'data.RData'),
        list = c('explainer', 'data', 'y', 'new_obs', 'selected_variables'))
 
-  ui <- .create_ui(vars, all)
-  server <- .create_server(all, vars)
+  ui <- .create_ui(vars)
+  server <- .create_server(vars)
   global <- .create_global()
   www <- .create_www()
 

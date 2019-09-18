@@ -4,14 +4,10 @@
 \alias{.create_server}
 \title{creat server.R}
 \usage{
-.create_server(factor_vars, cont_vars, all)
+.create_server(vars)
 }
 \arguments{
-\item{factor_vars}{vector of strings containing names of factor variables.}
-
-\item{cont_vars}{vector of strings containing names of continous variables.}
-
-\item{all}{logical value. If TRUE, then extra tab is displayed showing all explainers}
+\item{vars}{list of class of predictors.}
 }
 \description{
 creates string for server.R file.

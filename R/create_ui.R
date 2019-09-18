@@ -3,9 +3,8 @@
 #' creates string for ui.R file.
 #'
 #' @param vars list of class of predictors.
-#' @param all logical values, if TRUE extra tab is creating showing all explainers together.
 
-.create_ui <- function(vars, all){
+.create_ui <- function(vars){
 
   body <- "
   library(shiny)
@@ -30,25 +29,13 @@
         width = 3
       ), #-- sidebarPanel
 
-    mainPanel(
+    mainPanel( width = 9,
         navbarPage(
           'Model Explorer',
           position = 'fixed-top',
           inverse = T,
-
           tabPanel('CeterisParibus',
-                   div(
-                     column(8, h4('Numerical Variables')),
-                     column(4, actionButton('decribe_cp', 'Describe Plots'), align = 'right')
-                      ),
-           br(),
-            withSpinner(plotOutput('CeterisParibus'), color = '#4a3c89'),
-           br(),
-           h4('Factor Variables'),
-           br(),
-            withSpinner(plotOutput('CeterisParibus_factor'), color = '#4a3c89'),
-           br()
-           ),
+                   withSpinner(uiOutput('CP'), color = '#4a3c89')),
 
           tabPanel('BreakDown',
             p(actionButton('decribe_bd', 'Describe Plot'), align = 'right'),
@@ -84,28 +71,14 @@
             ),
             fluidRow(withSpinner(plotOutput('Lime'), color = '#4a3c89'))
         )
-          %s # <<all_explainers>>
-        ),
-          bsModal('describe_cp', 'Ceteris Paribus Description', 'decribe_cp', htmlOutput('CP_describe')),
-          bsModal('describe_bd', 'Ceteris Paribus Description', 'decribe_bd', htmlOutput('BD_describe'))
+        )
       )
     ) # -- sidebarLayout
   ) # --fluidPage
 ) # -- shinyUI"
 
-  all_expl_ui <- if(all) {
-    ",
-  tabPanel('All',
-           withSpinner(plotOutput('CeterisParibus1'), color = '#4a3c89'),
-           withSpinner(plotOutput('BreakDown1'), color = '#4a3c89'),
-           withSpinner(plotOutput('Shapley1'), color = '#4a3c89'),
-           withSpinner(plotOutput('shapeR1'), color = '#4a3c89'),
-           withSpinner(plotOutput('LocalModel1'), color = '#4a3c89'),
-           withSpinner(plotOutput('Lime1'), color = '#4a3c89'))"
-  } else ""
+body
 
-  sprintf( body,
-           all_expl_ui)
 }
 
 

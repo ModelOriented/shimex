@@ -3,10 +3,9 @@
 #' creates string for server.R file.
 #'
 #' @param vars list of class of predictors.
-#' @param all logical value. If TRUE, then extra tab is displayed showing all explainers
 
 
-.create_server <- function(all, vars){
+.create_server <- function(vars){
 
   factor_vars <- names(vars)[sapply(vars, function(x) x == 'factor')]
 
@@ -39,34 +38,40 @@
                              new_observation = observation())
       })
 
-   output$CeterisParibus <- renderPlot({
-   p <- plot(pred_cp()) +
-   ingredients::show_observations(pred_cp())
+    output$CP <- renderUI({
 
-   return(p)
+       selected_columns <- input$selected_columns
+       dg <- describe(pred_cp(), variables = input$selected_columns[1])
+       dg <- trimws(sub('The.*', '', dg))
+
+       tags$div(class='content',
+          tags$div(
+            renderText(dg),
+            style = 'font-size: 120%'
+          ),
+          lapply(1:length(selected_columns), function(i){
+
+           p <- plot(pred_cp(),
+           variables = input$selected_columns[i])
+           d <- sub('.*The', 'The', describe(pred_cp(),
+           variables = input$selected_columns[i]))
+
+           tags$div(
+               tags$div(
+                  renderPlot(p, width = 300, height = 200)
+               ),
+               tags$div(
+                renderText(d),
+                style = 'hight:60px;'
+               ),
+           style = 'width:300px; float:left; margin:5px;'
+           )
+       })
+       )
+
+
    })
 
-  output$CeterisParibus_factor%1$s <- renderPlot({
-
-  factor_vars_str <- c('", paste0(factor_vars, collapse = "', '"),"')
-
-  if(factor_vars_str[1] == '') return(NULL)
-  else { p <- plot(pred_cp(),
-            variables = factor_vars_str,
-            only_numerical  = F)
-        return(p)
-       }
-  })
-
-  output$CP_describe <- renderUI({
-
-    d <- describe(pred_cp())
-    d <- gsub('*', '', d, fixed = T)
-    d <- gsub('\n', '<br>', d, fixed = T)
-    d <- paste0(d, collapse = '<br>')
-    HTML(d)
-
-  })
 
   pred_bd <- reactive({
     iBreakDown::local_attributions(explainer,
@@ -87,7 +92,7 @@
      HTML(d)
   })
 
-  output$LocalModel%1$s <- renderPlot({
+  output$LocalModel <- renderPlot({
 
     pred_localModel <- localModel::individual_surrogate_model(explainer,
                                                               new_observation = observation(),
@@ -99,9 +104,9 @@
   })
 
 
-  output$Shapley%1$s <- renderPlot({
+  output$Shapley <- renderPlot({
 
-    shapley%1$s <- Shapley$new(predictor,
+    shapley <- Shapley$new(predictor,
                                x.interest = observation())
     p <- shapley$plot() +
          DALEX::theme_drwhy()
@@ -109,7 +114,7 @@
     return(p)
   })
 
-  output$Shap_iBD%1$s <- renderPlot({
+  output$Shap_iBD <- renderPlot({
 
      shap_ib <- iBreakDown::shap(explainer,
                      new_observation = observation())
@@ -124,13 +129,13 @@
                    k = input$lime_n_vars)
   })
 
-  output$Lime%1$s <- renderPlot({
+  output$Lime <- renderPlot({
     p <- plot(lime.explain()) +
          DALEX::theme_drwhy()
     return(p)
   })
 
-  output$shapeR%1$s <- renderPlot({
+  output$shapeR <- renderPlot({
     shaper <- shapper::individual_variable_effect(explainer$model,
                                                   data = explainer$data[, -1],
                                                   new_observation = observation())
@@ -138,7 +143,7 @@
    plot(shaper)
   })
 
-  output$Lime_ingr%1s <- renderPlot({
+  output$Lime_ingr <- renderPlot({
     asp <- as.list(colnames(data[, -1]))
     names(asp) <- colnames(data[, -1])
 
@@ -148,34 +153,22 @@
     return(plot(pred_lime))
 })")
 
-  all_tab <- ''
-  if(all) all_tab <- sprintf(str_explainers,'1')
-
   paste("library(shiny)
 
          shinyServer(function(input, output) {
 
-          observeEvent(input$selected_columns, {
-
-            lapply(colnames(data), shinyjs::hide)
-            lapply(input$selected_columns, shinyjs::show)
-
-          })
-
          observation <- reactive({
             o <- ", .create_observation(vars), "
           nulls <- sapply(o, function(x) length(x) == 0)
-          o[nulls] <- new_obs[nulls]
+          o[nulls] <- as.list(new_obs)[nulls]
 
         as.data.frame(o)
          }) \n
          ",
-         sprintf(str_explainers,
-         ''),
-        '\n',
-         all_tab,
+        str_explainers,
+        "\n
 
-         "# -----
+         # -----
          onStop(function() {
          stopApp()
          })

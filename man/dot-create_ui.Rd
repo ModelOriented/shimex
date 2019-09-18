@@ -4,14 +4,10 @@
 \alias{.create_ui}
 \title{creates ui.R}
 \usage{
-.create_ui(factor_vars, cont_vars, all)
+.create_ui(vars)
 }
 \arguments{
-\item{factor_vars}{vector of strings containing names of factor variables.}
-
-\item{cont_vars}{vector of strings containing names of continous variables.}
-
-\item{all}{logical values, if TRUE extra tab is creating showing all explainers together.}
+\item{vars}{list of class of predictors.}
 }
 \description{
 creates string for ui.R file.
