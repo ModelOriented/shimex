@@ -2,12 +2,13 @@
 #'
 #' creates string for server.R file.
 #'
-#' @param factor_vars vector of strings containing names of factor variables.
-#' @param cont_vars vector of strings containing names of continous variables.
+#' @param vars list of class of predictors.
 #' @param all logical value. If TRUE, then extra tab is displayed showing all explainers
 
 
-.create_server <- function(factor_vars, cont_vars, all, vars){
+.create_server <- function(all, vars){
+
+  factor_vars <- names(vars)[sapply(vars, function(x) x == 'factor')]
 
   str_explainers <- paste0("
 

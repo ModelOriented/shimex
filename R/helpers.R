@@ -7,8 +7,7 @@
   library(shinyBS)
 
   load('data.RData')
-  data <- data.frame(explainer$data)
-  predictor <- Predictor$new(explainer$model, data = data[, -1], y = data[, 1])"
+  predictor <- Predictor$new(explainer$model, data = data, y = y)"
 
   return(global)
 
