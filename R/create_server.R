@@ -40,37 +40,37 @@
 
     output$CP <- renderUI({
 
-       selected_columns <- input$selected_columns
-       dg <- describe(pred_cp(), variables = input$selected_columns[1])
-       dg <- trimws(sub('The.*', '', dg))
-
-       tags$div(class='content',
-          tags$div(
-            renderText(dg),
-            style = 'font-size: 120%'
-          ),
-          lapply(1:length(selected_columns), function(i){
-
-           p <- plot(pred_cp(),
-           variables = input$selected_columns[i])
-           d <- sub('.*The', 'The', describe(pred_cp(),
-           variables = input$selected_columns[i]))
-
+     selected_columns <- input$selected_columns
+     dg <- describe(pred_cp(), variables = input$selected_columns[1])
+     dg <- trimws(sub('\n.*', '', dg))
+     
+     tags$div(class='content',
+       tags$div(
+         renderText(dg),
+         style = 'font-size: 120%'
+       ),
+       tags$br(),
+       lapply(1:length(selected_columns), function(i){
+                           
+         p <- plot(pred_cp(),
+         variables = input$selected_columns[i])
+         d <- sub(dg, '', describe(pred_cp(),
+         variables = input$selected_columns[i]))
+         
+         tags$div(
            tags$div(
-               tags$div(
-                  renderPlot(p, width = 300, height = 200)
-               ),
-               tags$div(
-                renderText(d),
-                style = 'hight:60px;'
-               ),
-           style = 'width:300px; float:left; margin:5px;'
-           )
-       })
-       )
-
-
-   })
+             renderPlot(p, width = 300, height = 200)
+           ),
+           tags$div(
+             renderText(d)
+           ),
+           style = 'width:300px;height:340px; float:left; margin:5px;'
+         )
+     })
+   )
+                           
+                           
+})
 
 
   pred_bd <- reactive({
