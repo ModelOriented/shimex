@@ -19,5 +19,5 @@ devtools::install_github("monikachudek/shimex")
 library(randomForest)
 model_rm <- randomForest(life_length ~., data = DALEX::dragons, ntree = 200)
 explainer <- DALEX::explain(model_rm)
-create_shiny(explainer)
+create_shimex(explainer,  DALEX::dragons[1, ])
 ```
