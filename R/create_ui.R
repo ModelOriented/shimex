@@ -38,8 +38,8 @@
                    withSpinner(uiOutput('CP'), color = '#4a3c89')),
 
           tabPanel('BreakDown',
-            p(actionButton('decribe_bd', 'Describe Plot'), align = 'right'),
-            withSpinner(plotOutput('BreakDown'), color = '#4a3c89')),
+            withSpinner(plotOutput('BreakDown'), color = '#4a3c89'),
+                        htmlOutput('BD_describe')),
 
           tabPanel('Shap',
             h4('iBreakDown package'),

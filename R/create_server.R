@@ -47,7 +47,7 @@
      tags$div(class='content',
        tags$div(
          renderText(dg),
-         style = 'font-size: 120%'
+         style = 'font-size: 110%'
        ),
        tags$br(),
        lapply(1:length(selected_columns), function(i){
@@ -64,7 +64,7 @@
            tags$div(
              renderText(d)
            ),
-           style = 'width:300px;height:340px; float:left; margin:5px;'
+           style = 'width:300px;height:340px; float:left; margin:5px; font-size:13px'
          )
      })
    )
