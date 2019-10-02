@@ -5,8 +5,9 @@
 \title{create Shiny App for Exploring Model}
 \usage{
 create_shimex(explainer, new_obs, data = explainer$data,
-  selected_variables = NULL, all = FALSE, main_dir = NULL,
-  delete = TRUE)
+  selected_variables = NULL, selected_explainers = c("CeterisParibus",
+  "BreakDown", "Shap", "LocalModel", "Lime"), all = FALSE,
+  main_dir = NULL, delete = TRUE)
 }
 \arguments{
 \item{explainer}{explainer created with function `DALEX::explain()`}
@@ -16,6 +17,10 @@ create_shimex(explainer, new_obs, data = explainer$data,
 \item{data}{---}
 
 \item{selected_variables}{a vector of variable names that will be shown in input panel,}
+
+\item{selected_explainers}{a vector of explainers, that should be shown in the app.
+Possible choices: c('CeterisParibus', 'BreakDown', 'Shap', 'Shap_iml', 'Shap_shapper', 'LocalModel', 'Lime', 'Lime_iml')
+The default value are explainers implemented by MI2 DataLab.}
 
 \item{all}{logical value. If TRUE, then extra tab is displayed showing all explainers,}
 

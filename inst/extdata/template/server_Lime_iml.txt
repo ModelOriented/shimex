@@ -1,0 +1,13 @@
+lime.explain <- reactive({
+    LocalModel$new(predictor,
+                   x.interest = observation(),
+                   k = input$lime_n_vars)
+  })
+  output$Lime_iml <- renderUI({
+    p <- plot(lime.explain()) +
+         DALEX::theme_drwhy()
+         
+    tags$div(
+    renderPlot(p)
+    )
+  })

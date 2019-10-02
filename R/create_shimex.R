@@ -6,6 +6,9 @@
 #' @param new_obs a new observation with columns that corresponds to variables used in the model
 #' @param data ---
 #' @param selected_variables a vector of variable names that will be shown in input panel,
+#' @param selected_explainers a vector of explainers, that should be shown in the app.
+#' Possible choices: c('CeterisParibus', 'BreakDown', 'Shap', 'Shap_iml', 'Shap_shapper', 'LocalModel', 'Lime', 'Lime_iml')
+#' The default value are explainers implemented by MI2 DataLab.
 #' @param all logical value. If TRUE, then extra tab is displayed showing all explainers,
 #' @param main_dir string, path where shiny files should be stored.
 #' @param delete logical value, if TRUE shiny files are deleted on exit of function.
@@ -22,7 +25,9 @@
 #'
 
 create_shimex <- function(explainer, new_obs, data = explainer$data, selected_variables = NULL,
-                         all = FALSE, main_dir = NULL, delete = TRUE){
+                          selected_explainers = c('CeterisParibus', 'BreakDown', 'Shap', 'LocalModel', 'Lime'),
+                          all = FALSE, main_dir = NULL,
+                          delete = TRUE){
 
   # create main folder
   if(is.null(main_dir)) main_dir <- tempdir()
@@ -42,8 +47,8 @@ create_shimex <- function(explainer, new_obs, data = explainer$data, selected_va
   vars <- lapply(data, class)
   if(is.null(selected_variables)) selected_variables <- colnames(data)[1:min(ncol(data), 5)]
 
-  ui <- .create_ui(vars)
-  server <- .create_server(vars)
+  ui <- .create_ui(selected_explainers)
+  server <- .create_server(vars, selected_explainers)
   global <- .create_global()
   www <- .create_www()
 
@@ -56,8 +61,5 @@ create_shimex <- function(explainer, new_obs, data = explainer$data, selected_va
 
   if(delete) unlink(main_dir, recursive = TRUE)
 }
-
-
-
 
 

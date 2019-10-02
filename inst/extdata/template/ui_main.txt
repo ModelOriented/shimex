@@ -1,0 +1,32 @@
+  shinyUI(fluidPage(
+    theme = 'style.css',
+    shinyjs::useShinyjs(),
+
+    # ---- Sidebar
+    sidebarLayout(
+      sidebarPanel(
+        selectInput(
+          inputId = 'selected_columns',
+          label = 'Select variables',
+          choices = colnames(data),
+          selected = selected_variables,
+          multiple = T
+        ),
+
+        tags$hr(),
+    uiOutput('vars_input'),
+        width = 3
+      ), #-- sidebarPanel
+
+    mainPanel( width = 9,
+        navbarPage(
+          'Model Explorer',
+          position = 'fixed-top',
+          inverse = T,
+          
+          %s #---tabs
+        )
+      )
+    ) # -- sidebarLayout
+  ) # --fluidPage
+) # -- shinyUI

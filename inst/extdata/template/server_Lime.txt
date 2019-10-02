@@ -1,0 +1,10 @@
+output$Lime <- renderUI({
+    asp <- as.list(colnames(data[, -1]))
+    names(asp) <- colnames(data[, -1])
+    pred_lime <- ingredients::aspect_importance(explainer,
+                           new_observation = observation(),
+                           aspects = asp)
+    tags$div(
+    renderPlot(plot(pred_lime))
+    )
+})

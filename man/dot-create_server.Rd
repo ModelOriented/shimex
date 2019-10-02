@@ -4,10 +4,12 @@
 \alias{.create_server}
 \title{creat server.R}
 \usage{
-.create_server(vars)
+.create_server(vars, selected_explainers)
 }
 \arguments{
 \item{vars}{list of class of predictors.}
+
+\item{selected_explainers}{---}
 }
 \description{
 creates string for server.R file.

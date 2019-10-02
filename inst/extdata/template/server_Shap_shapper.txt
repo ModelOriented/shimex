@@ -1,0 +1,8 @@
+output$Shap_shapper <- renderUI({
+    shaper <- shapper::individual_variable_effect(explainer$model,
+                                                  data = explainer$data[, -1],
+                                                  new_observation = observation())
+   tags$div(                                                
+   renderPlot(plot(shaper))
+   )
+  })

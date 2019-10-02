@@ -1,10 +1,9 @@
 .create_global <- function(){
 
   global <- "
-  library(data.table)
+  library(shiny)
   library(iml)
   library(shinycssloaders)
-  library(shinyBS)
 
   load('data.RData')
   predictor <- Predictor$new(explainer$model, data = data, y = y)"

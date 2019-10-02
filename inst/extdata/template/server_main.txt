@@ -1,0 +1,45 @@
+shinyServer(function(input, output) {
+  
+  #----- observation --------
+  
+  observation <- reactive({
+    o <- %s    # -- observation df   //.create_observation(vars)
+    nulls <- sapply(o, function(x) length(x) == 0)
+    o[nulls] <- as.list(new_obs)[nulls]
+    
+    as.data.frame(o)
+  })
+  
+  #------ Input panel -------
+  
+  output$vars_input <- renderUI({
+    
+    selected_columns <- input$selected_columns
+    
+    lapply(1:length(selected_columns), function(i){
+      var_values <- data[, colnames(data) == selected_columns[i]]
+      
+      if(class(var_values) == 'factor'){
+        selectInput(inputId = selected_columns[i],
+                    label = selected_columns[i],
+                    choices = levels(var_values),
+                    selected = observation()[[selected_columns[i]]])}
+      else{
+        sliderInput(inputId = selected_columns[i],
+                    label = selected_columns[i],
+                    min = round(min(var_values, na.rm = T)),
+                    max = round(max(var_values, na.rm = T)),
+                    value = observation()[[selected_columns[i]]])
+      }
+    })
+  })
+  
+  #------ generate explainers -----
+  
+  %s #
+  
+  # -----
+  onStop(function() {
+    stopApp()
+  })
+})

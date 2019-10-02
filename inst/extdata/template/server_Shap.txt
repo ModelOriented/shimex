@@ -1,0 +1,8 @@
+output$Shap <- renderUI({
+     shap_ib <- iBreakDown::shap(explainer,
+                     new_observation = observation())
+     p <- plot(shap_ib)
+     tags$div(
+     renderPlot(p)
+     )
+  })

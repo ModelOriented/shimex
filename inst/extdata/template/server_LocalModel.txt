@@ -1,0 +1,11 @@
+output$LocalModel <- renderUI({
+    pred_localModel <- localModel::individual_surrogate_model(explainer,
+                                                              new_observation = observation(),
+                                                              size = 500)
+    p <- plot(pred_localModel) +
+         DALEX::theme_drwhy()
+         
+    tags$div(
+    renderPlot(p)
+    )
+  })

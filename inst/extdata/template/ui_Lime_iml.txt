@@ -1,0 +1,10 @@
+tags$div(
+  class = 'box',
+  numericInput(
+    'lime_n_vars',
+    label = 'Max number of features to be used for the surrogate model.',
+    value = 3,
+    min = 1,
+    max = ncol(data) - 1
+  )
+),

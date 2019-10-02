@@ -1,0 +1,9 @@
+output$Shap_iml <- renderUI({
+    shapley <- Shapley$new(predictor,
+                               x.interest = observation())
+    p <- shapley$plot() +
+         DALEX::theme_drwhy()
+    tags$div(     
+    renderPlot(p)
+    )
+  })

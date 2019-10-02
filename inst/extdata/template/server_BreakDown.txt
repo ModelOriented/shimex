@@ -1,0 +1,19 @@
+pred_bd <- reactive({
+  iBreakDown::local_attributions(explainer,
+                                 new_observation = observation())
+})
+
+output$BreakDown <- renderUI({
+  
+  d <- iBreakDown::describe(pred_bd())
+  d <- gsub('*', '', d, fixed = T)
+  d <- paste0(d, collapse = '<br>')
+  
+  p <- plot(pred_bd())
+  
+  tags$div(class='content',
+           tags$div(renderPlot(p)),
+           tags$div(renderText(d))
+  )
+  
+})

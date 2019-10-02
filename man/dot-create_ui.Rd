@@ -4,10 +4,10 @@
 \alias{.create_ui}
 \title{creates ui.R}
 \usage{
-.create_ui(vars)
+.create_ui(selected_explainers)
 }
 \arguments{
-\item{vars}{list of class of predictors.}
+\item{selected_explainers}{list of class of predictors.}
 }
 \description{
 creates string for ui.R file.
