@@ -6,7 +6,7 @@
 #' @param new_obs a new observation with columns that corresponds to variables used in the model
 #' @param data ---
 #' @param selected_variables a vector of variable names that will be shown in input panel,
-#' @param selected_explainers a vector of explainers, that should be shown in the app.
+#' @param selected_explainers a vector of explainers, that will be shown in the app.
 #' Possible choices: c('CeterisParibus', 'BreakDown', 'Shap', 'Shap_iml', 'Shap_shapper', 'LocalModel', 'Lime', 'Lime_iml')
 #' The default value are explainers implemented by MI2 DataLab.
 #' @param all logical value. If TRUE, then extra tab is displayed showing all explainers,
@@ -49,8 +49,8 @@ create_shimex <- function(explainer, new_obs, data = explainer$data, selected_va
 
   ui <- .create_ui(selected_explainers)
   server <- .create_server(vars, selected_explainers)
-  global <- .create_global()
-  www <- .create_www()
+  global <- .create_global(selected_explainers)
+  www <- readChar(system.file("extdata", "template", "www.txt", package = "shimex"), nchars = 1e6)
 
   # write files
   .write_files(main_dir, ui, server, global, www)

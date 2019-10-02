@@ -1,39 +1,18 @@
-.create_global <- function(){
+.create_global <- function(selected_explainers){
 
   global <- "
-  library(shiny)
   library(iml)
   library(shinycssloaders)
 
-  load('data.RData')
-  predictor <- Predictor$new(explainer$model, data = data, y = y)"
+  load('data.RData')"
+  
+  iml <- "
+  library(iml)
+  predictor <- Predictor$new(explainer$model, data = data, y = y)
+  "
+  if(any(grepl('iml', selected_explainers))) global <- paste(global, iml)
 
   return(global)
-
-}
-
-
-.create_www <- function(){
-
-  www <- "
-  body {
-  background-color: #fff;
-    padding-top: 70px;
-  }
-
-  .navbar { background-color: #4a3c89;
-  }
-
-  .navbar-inverse .navbar-nav>li>a{ color: #fff !important; }
-
-      .navbar-nav li a:hover, .navbar-nav > .active > a {
-        color: #fff !important;
-
-          background-color:#370F54 !important;
-          background-image: none !important;
-  }"
-
-  return(www)
 
 }
 
