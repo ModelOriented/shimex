@@ -1,7 +1,7 @@
 The shimex package - Shiny Models Explorer
 ==================================================================================================================
 
-[![Build Status](https://travis-ci.org/monikachudek/shimex.svg?branch=master)](https://travis-ci.org/monikachudek/shimex)
+[![Build Status](https://travis-ci.org/ModelOriented/shimex.svg?branch=master)](https://travis-ci.org/ModelOriented/shimex)
 [![Codecov test coverage](https://codecov.io/gh/monikachudek/shimex/branch/master/graph/badge.svg)](https://codecov.io/gh/monikachudek/shimex?branch=master)
 
 
