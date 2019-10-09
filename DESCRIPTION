@@ -21,4 +21,5 @@ Imports:
     iml
 Suggests: 
     testthat,
-    covr
+    covr,
+    randomForest
