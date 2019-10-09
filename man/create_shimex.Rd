@@ -2,12 +2,12 @@
 % Please edit documentation in R/create_shimex.R
 \name{create_shimex}
 \alias{create_shimex}
-\title{create Shiny App for Exploring Model}
+\title{Create SHIny app for Model EXploration}
 \usage{
 create_shimex(explainer, new_obs, data = explainer$data,
   selected_variables = NULL, selected_explainers = c("CeterisParibus",
-  "BreakDown", "Shap", "LocalModel", "Lime"), all = FALSE,
-  main_dir = NULL, delete = TRUE)
+  "BreakDown", "Shap", "LocalModel", "Lime"), main_dir = NULL,
+  delete = TRUE, ...)
 }
 \arguments{
 \item{explainer}{explainer created with function `DALEX::explain()`}
@@ -18,15 +18,15 @@ create_shimex(explainer, new_obs, data = explainer$data,
 
 \item{selected_variables}{a vector of variable names that will be shown in input panel,}
 
-\item{selected_explainers}{a vector of explainers, that should be shown in the app.
+\item{selected_explainers}{a vector of explainers, that will be shown in the app.
 Possible choices: c('CeterisParibus', 'BreakDown', 'Shap', 'Shap_iml', 'Shap_shapper', 'LocalModel', 'Lime', 'Lime_iml')
 The default value are explainers implemented by MI2 DataLab.}
-
-\item{all}{logical value. If TRUE, then extra tab is displayed showing all explainers,}
 
 \item{main_dir}{string, path where shiny files should be stored.}
 
 \item{delete}{logical value, if TRUE shiny files are deleted on exit of function.}
+
+\item{...}{other parameters.}
 }
 \description{
 creates files for Shiny App and runs Shiny.

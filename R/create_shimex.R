@@ -11,6 +11,7 @@
 #' The default value are explainers implemented by MI2 DataLab.
 #' @param main_dir string, path where shiny files should be stored.
 #' @param delete logical value, if TRUE shiny files are deleted on exit of function.
+#' @param ... other parameters.
 #'
 #' @examples
 #' \dontrun{
