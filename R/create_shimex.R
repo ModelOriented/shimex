@@ -1,4 +1,4 @@
-#' create Shiny App for Exploring Model
+#' Create SHIny app for Model EXploration
 #'
 #' creates files for Shiny App and runs Shiny.
 #'
@@ -9,7 +9,6 @@
 #' @param selected_explainers a vector of explainers, that will be shown in the app.
 #' Possible choices: c('CeterisParibus', 'BreakDown', 'Shap', 'Shap_iml', 'Shap_shapper', 'LocalModel', 'Lime', 'Lime_iml')
 #' The default value are explainers implemented by MI2 DataLab.
-#' @param all logical value. If TRUE, then extra tab is displayed showing all explainers,
 #' @param main_dir string, path where shiny files should be stored.
 #' @param delete logical value, if TRUE shiny files are deleted on exit of function.
 #'
@@ -26,13 +25,23 @@
 
 create_shimex <- function(explainer, new_obs, data = explainer$data, selected_variables = NULL,
                           selected_explainers = c('CeterisParibus', 'BreakDown', 'Shap', 'LocalModel', 'Lime'),
-                          all = FALSE, main_dir = NULL,
-                          delete = TRUE){
+                          main_dir = NULL,
+                          delete = TRUE, ...){
+  
+  .create_shimex(explainer, new_obs, data, selected_variables, selected_explainers, main_dir, delete, ...)
+}
 
+
+.create_shimex <- function(explainer, new_obs, data, selected_variables,
+                          selected_explainers, main_dir, delete, run = TRUE){
+
+  cat('start')
   # create main folder
   if(is.null(main_dir)) main_dir <- tempdir()
   main_dir <- file.path(main_dir, 'shimex')
   if(!dir.exists(main_dir)) dir.create(main_dir)
+  
+  cat('catalog created')
 
   # get predictors and response names
   vars <- all.vars(formula(explainer$model))
@@ -57,9 +66,15 @@ create_shimex <- function(explainer, new_obs, data = explainer$data, selected_va
   save(file = file.path(main_dir, 'data.RData'),
        list = c('explainer', 'data', 'y', 'new_obs', 'selected_variables'))
 
-  shiny::runApp(main_dir)
+  cat('files written')
+  cat(run)
+  
+  if(run) shiny::runApp(main_dir)
+  
+  cat('app run')
 
   if(delete) unlink(main_dir, recursive = TRUE)
+  cat('deleted')
 }
 
 

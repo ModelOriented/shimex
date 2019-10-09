@@ -3,6 +3,10 @@ The shimex package - Shiny Models Explorer
 
 [![Build Status](https://travis-ci.org/monikachudek/shimex.svg?branch=master)](https://travis-ci.org/monikachudek/shimex)
 
+<!-- badges: start -->
+  [![Codecov test coverage](https://codecov.io/gh/monikachudek/shimex/branch/master/graph/badge.svg)](https://codecov.io/gh/monikachudek/shimex?branch=master)
+  <!-- badges: end -->
+
 The `shimex` package enables creating an interactive shiny application, which collects local explainers such as: CeterisParibus, BreakDown, Shap, LocalModel and Lime.
 
 ## Installation

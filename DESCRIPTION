@@ -18,5 +18,7 @@ Imports:
     DALEX,
     shapper,
     shinycssloaders,
-    iml,
-    shinyBS
+    iml
+Suggests: 
+    testthat,
+    covr

@@ -8,7 +8,7 @@ pred_cp <- reactive({
 output$CeterisParibus <- renderUI({
   
   selected_columns <- input$selected_columns
-  dg <- describe(pred_cp(), variables = input$selected_columns[1])
+  dg <- ingredients::describe(pred_cp(), variables = input$selected_columns[1])
   dg <- trimws(sub('\n.*', '', dg))
   
   tags$div(class='content',
@@ -21,7 +21,7 @@ output$CeterisParibus <- renderUI({
              
              p <- plot(pred_cp(),
                        variables = input$selected_columns[i])
-             d <- sub(dg, '', describe(pred_cp(),
+             d <- sub(dg, '', ingredients::describe(pred_cp(),
                                        variables = input$selected_columns[i]))
              
              tags$div(
