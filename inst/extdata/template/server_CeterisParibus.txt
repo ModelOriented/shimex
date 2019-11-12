@@ -6,24 +6,31 @@ pred_cp <- reactive({
 })
 
 output$CeterisParibus <- renderUI({
-  
+
   selected_columns <- input$selected_columns
   dg <- ingredients::describe(pred_cp(), variables = input$selected_columns[1])
   dg <- trimws(sub('\n.*', '', dg))
-  
-  tags$div(class='content',
+
+  tags$div(
+          tags$div(
+              HTML('Ceteris Paribus profile is a local explainer that tells us how a change in one variable                        will affect model predictions, while all other variables will remain unchanged.
+              <a href =  "https://pbiecek.github.io/PM_VEE/ceterisParibus.html" target="_blank">
+                     Read more about <i>Ceteris Paribus</i></a>'),
+              style = 'font-size: 110%; margin-bottom:25px'
+           ),
            tags$div(
              renderText(dg),
              style = 'font-size: 110%'
            ),
            tags$br(),
            lapply(1:length(selected_columns), function(i){
-             
+
              p <- plot(pred_cp(),
                        variables = input$selected_columns[i])
              d <- sub(dg, '', ingredients::describe(pred_cp(),
                                        variables = input$selected_columns[i]))
-             
+             d <- gsub('*', '', d, fixed = T)
+
              tags$div(
                tags$div(
                  renderPlot(p, width = 300, height = 200)
@@ -33,9 +40,9 @@ output$CeterisParibus <- renderUI({
                ),
                style = 'width:300px;height:340px; float:left; margin:5px; font-size:13px'
              )
-           })
+           }), style = 'padding-bottom:20px'
   )
-  
-  
+
+
 })
 

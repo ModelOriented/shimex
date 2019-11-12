@@ -12,7 +12,7 @@ The `shimex` package enables creating an interactive shiny application, which co
 ```{r}
 # Development version from GitHub:
 # install.packages("devtools")
-devtools::install_github("monikachudek/shimex")
+devtools::install_github("ModelOriented/shimex")
 ```
 
 ## Demo
@@ -21,5 +21,5 @@ devtools::install_github("monikachudek/shimex")
 library(randomForest)
 model_rm <- randomForest(life_length ~., data = DALEX::dragons, ntree = 200)
 explainer <- DALEX::explain(model_rm)
-create_shimex(explainer,  DALEX::dragons[1, ])
+create_shimex(explainer, DALEX::dragons[1, ])
 ```

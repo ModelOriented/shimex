@@ -6,8 +6,9 @@ lime.explain <- reactive({
   output$Lime_iml <- renderUI({
     p <- plot(lime.explain()) +
          DALEX::theme_drwhy()
-         
-    tags$div(
-    renderPlot(p)
+
+      tags$div(
+      renderPlot(plot(p)), 
+      style = 'width:80%'
     )
   })

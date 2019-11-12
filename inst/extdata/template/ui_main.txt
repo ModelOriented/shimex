@@ -20,10 +20,10 @@
 
     mainPanel( width = 9,
         navbarPage(
-          'Model Explorer',
+          'shimex',
           position = 'fixed-top',
           inverse = T,
-          
+
           %s #---tabs
         )
       )

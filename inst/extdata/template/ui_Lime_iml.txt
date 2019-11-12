@@ -1,10 +1,20 @@
+     
 tags$div(
-  class = 'box',
-  numericInput(
-    'lime_n_vars',
-    label = 'Max number of features to be used for the surrogate model.',
-    value = 3,
-    min = 1,
-    max = ncol(data) - 1
+  tags$div(
+            HTML('The key idea behind LIME method is to locally approximate a black-box model by a simpler                         white-box model, which is easier to interpret.
+            <a href = "https://pbiecek.github.io/PM_VEE/LIME.html" target="_blank">
+                   Read more about <i>LIME</i></a>'),
+            style = 'font-size: 110%; margin-bottom:25px'
+         ),
+
+  tags$div(
+    class = 'box',
+    numericInput(
+      'lime_n_vars',
+      label = 'Max number of features to be used for the surrogate model.',
+      value = 3,
+      min = 1,
+      max = ncol(data) - 1
+    )
   )
-),
+  ),
