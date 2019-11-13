@@ -18,7 +18,8 @@ Imports:
     DALEX,
     shapper,
     shinycssloaders,
-    iml
+    iml,
+    DALEXtra
 Suggests: 
     testthat,
     covr,

@@ -28,7 +28,7 @@ create_shimex <- function(explainer, new_obs, data = explainer$data, selected_va
                           selected_explainers = c('CeterisParibus', 'BreakDown', 'Shap', 'LocalModel', 'Lime'),
                           main_dir = NULL,
                           delete = TRUE, ...){
-  
+
   .create_shimex(explainer, new_obs, data, selected_variables, selected_explainers, main_dir, delete, ...)
 }
 
@@ -41,7 +41,7 @@ create_shimex <- function(explainer, new_obs, data = explainer$data, selected_va
   if(is.null(main_dir)) main_dir <- tempdir()
   main_dir <- file.path(main_dir, 'shimex')
   if(!dir.exists(main_dir)) dir.create(main_dir)
-  
+
   cat('catalog created')
 
   # get predictors and response names
@@ -67,15 +67,8 @@ create_shimex <- function(explainer, new_obs, data = explainer$data, selected_va
   save(file = file.path(main_dir, 'data.RData'),
        list = c('explainer', 'data', 'y', 'new_obs', 'selected_variables'))
 
-  cat('files written')
-  cat(run)
-  
   if(run) shiny::runApp(main_dir)
-  
-  cat('app run')
-
   if(delete) unlink(main_dir, recursive = TRUE)
-  cat('deleted')
 }
 
 

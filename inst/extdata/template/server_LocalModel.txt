@@ -6,6 +6,15 @@ output$LocalModel <- renderUI({
          DALEX::theme_drwhy()
          
     tags$div(
-    renderPlot(p)
+      tags$div(
+                HTML('Localmodel is a variant of LIME. The key idea behind LIME method is to locally approximate                       a black-box model by a simpler white-box model, which is easier to interpret.
+                <a href = "https://modeloriented.github.io/localModel/" target="_blank">
+                       Read more about <i>localmodel</i></a>'),
+                style = 'font-size: 110%; margin-bottom:25px'
+             ),
+      tags$div(
+      renderPlot(plot(p))
+      ), 
+      style = 'width:80%'
     )
   })

@@ -1,10 +1,20 @@
 output$Lime <- renderUI({
     asp <- as.list(colnames(data[, -1]))
     names(asp) <- colnames(data[, -1])
-    pred_lime <- ingredients::aspect_importance(explainer,
+    pred_lime <- DALEXtra::aspect_importance(explainer,
                            new_observation = observation(),
                            aspects = asp)
     tags$div(
-    renderPlot(plot(pred_lime))
+      tags$div(
+                HTML('The key idea behind LIME method is to locally approximate a black-box model by a simpler                         white-box model, which is easier to interpret.
+                <br>
+                <a href = "https://pbiecek.github.io/PM_VEE/LIME.html" target="_blank">
+                       Read more about <i>LIME</i></a>'),
+                style = 'font-size: 100%; margin-bottom:25px'
+             ),
+      tags$div(
+      renderPlot(plot(pred_lime))
+      ), 
+    style = 'width:80%'
     )
 })

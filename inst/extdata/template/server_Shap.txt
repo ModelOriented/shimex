@@ -2,7 +2,16 @@ output$Shap <- renderUI({
      shap_ib <- iBreakDown::shap(explainer,
                      new_observation = observation())
      p <- plot(shap_ib)
-     tags$div(
-     renderPlot(p)
-     )
+      tags$div(
+      tags$div(
+                HTML('SHAP (SHapley Additive exPlanations) presents consistent and locally accurate additive                           feature attribution method based on expectations.
+                <a href = "https://pbiecek.github.io/PM_VEE/shapley.html" target="_blank">
+                       Read more about <i>SHAP</i></a>'),
+                style = 'font-size: 110%; margin-bottom:25px'
+             ),
+      tags$div(
+      renderPlot(plot(p))
+      ), 
+      style = 'width:80%'
+    )
   })
