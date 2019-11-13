@@ -9,10 +9,10 @@ The `shimex` package enables interactive exploration of machine learning predict
 Thanks to the graphical interface, the application streamlines the process of model exploration. 
 
 The Explainers presented in the app:
-- Ceteris Paribus from [`ingredients`](https://github.com/ModelOriented/ingredients)([read more](https://pbiecek.github.io/PM_VEE/ceterisParibus.html)),
-- BreakDown from [`iBreakDown`](https://github.com/ModelOriented/iBreakDown)([read more](https://pbiecek.github.io/PM_VEE/breakDown.html))
-- LIME from [`DALEXtra`](https://github.com/ModelOriented/DALEXtra), [`iml`](https://github.com/christophM/iml), [`localmodel`](https://github.com/ModelOriented/localModel)([read more](https://pbiecek.github.io/PM_VEE/LIME.html)) 
-- SHAP from [`iBreakDown`](https://github.com/ModelOriented/iBreakDown), [`shapper`](https://github.com/ModelOriented/shapper), [`iml`](https://github.com/christophM/iml)([read more](https://pbiecek.github.io/PM_VEE/shapley.html)).
+- [Ceteris Paribus](https://pbiecek.github.io/PM_VEE/ceterisParibus.html)) from [`ingredients`](https://github.com/ModelOriented/ingredients),
+- [BreakDown](https://pbiecek.github.io/PM_VEE/breakDown.html) from [`iBreakDown`](https://github.com/ModelOriented/iBreakDown),
+- [LIME](https://pbiecek.github.io/PM_VEE/LIME.html) from [`DALEXtra`](https://github.com/ModelOriented/DALEXtra), [`iml`](https://github.com/christophM/iml), [`localmodel`](https://github.com/ModelOriented/localModel),
+- [SHAP](https://pbiecek.github.io/PM_VEE/shapley.html) from [`iBreakDown`](https://github.com/ModelOriented/iBreakDown), [`shapper`](https://github.com/ModelOriented/shapper), [`iml`](https://github.com/christophM/iml).
 
 
 ## Installation
