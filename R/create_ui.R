@@ -8,7 +8,6 @@
 
   main <- readChar(system.file("extdata", "template", "ui_main.txt", package = "shimex"),
                  nchars = 1e6)
-
   
   tabs <- paste0("tabPanel('", selected_explainers,"',
                     %s

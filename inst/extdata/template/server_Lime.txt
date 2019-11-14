@@ -10,7 +10,7 @@ output$Lime <- renderUI({
                 <br>
                 <a href = "https://pbiecek.github.io/PM_VEE/LIME.html" target="_blank">
                        Read more about <i>LIME</i></a>'),
-                style = 'font-size: 100%; margin-bottom:25px'
+                 id = 'l_desc'
              ),
       tags$div(
       renderPlot(plot(pred_lime))

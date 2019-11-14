@@ -16,7 +16,7 @@ output$CeterisParibus <- renderUI({
               HTML('Ceteris Paribus profile is a local explainer that tells us how a change in one variable                        will affect model predictions, while all other variables will remain unchanged.
               <a href =  "https://pbiecek.github.io/PM_VEE/ceterisParibus.html" target="_blank">
                      Read more about <i>Ceteris Paribus</i></a>'),
-              style = 'font-size: 110%; margin-bottom:25px'
+              id = 'cp_desc'
            ),
            tags$div(
              renderText(dg),

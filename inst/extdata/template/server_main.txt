@@ -1,4 +1,24 @@
 shinyServer(function(input, output) {
+
+  # ------ SessionInfo -----
+    
+    observeEvent(input$sessionInfo, {
+      
+      session_info <- devtools::session_info()
+      writeLines(capture.output(session_info),"session_info.txt")
+      si <- readChar("session_info.txt",
+               nchars = 1e6)
+      si <- gsub('\n', '<br>', si)
+      si <- gsub('\r', '', si)
+      
+        showModal(modalDialog(
+          title = "Session info",
+          footer = modalButton("Close"),
+          HTML(si),
+          easyClose = TRUE
+        ))
+    })
+
   
   #----- observation --------
   

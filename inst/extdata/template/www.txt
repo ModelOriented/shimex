@@ -13,4 +13,22 @@ body {
         
         background-color:#370F54 !important;
         background-image: none !important;
-    }
+}
+
+a[data-value='shimex'] {
+    height: 50px;
+    padding: 15px 15px;
+    font-size: 18px;
+    line-height: 20px;
+}
+
+.navbar-brand {
+  padding: 15px 0 15px 0;
+}
+
+#cp_desc, #bd_desc, #l_desc, #lm_desc, #s_shpr_desc, #s_desc, #s_iml_desc {
+  font-size: 110%;
+  margin: 10px 0 25px 0;
+}
+
+

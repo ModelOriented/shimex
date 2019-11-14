@@ -7,7 +7,7 @@ output$Shap <- renderUI({
                 HTML('SHAP (SHapley Additive exPlanations) presents consistent and locally accurate additive                           feature attribution method based on expectations.
                 <a href = "https://pbiecek.github.io/PM_VEE/shapley.html" target="_blank">
                        Read more about <i>SHAP</i></a>'),
-                style = 'font-size: 110%; margin-bottom:25px'
+                id = 's_desc'
              ),
       tags$div(
       renderPlot(plot(p))
