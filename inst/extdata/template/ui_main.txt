@@ -20,9 +20,28 @@
 
     mainPanel( width = 9,
         navbarPage(
-          'shimex',
+          title = '',
           position = 'fixed-top',
           inverse = T,
+          
+          tabPanel('shimex',
+                  icon = icon('home'),
+                  tags$div(
+
+                   HTML('
+                        <h4 class="code-line" data-line-start=0 data-line-end=1 ><a id="About_shimex_0"></a>About shimex</h4>
+<p class="has-line-data" data-line-start="2" data-line-end="4">Using <code>shimex</code> app you can easily and quickly explore your model <em>locally</em>.<br>
+<em>Local explainers</em> are designed to better understand model behaviour around single obervation, not the entire model.</p>
+<h6 class="code-line" data-line-start=5 data-line-end=6 ><a id="How_to_use_5"></a>How to use</h6>
+<p class="has-line-data" data-line-start="6" data-line-end="7">You can modify the current explained observation at any time using the sliders and select lists in the left panel. If any variable is not visible there, add it to the <em>Select variables</em> input.</p>
+<p class="has-line-data" data-line-start="8" data-line-end="10">At the top of page you can find tabs with explainers presented in this <code>shimex</code> app.<br>
+You can view the explainer’s results by clicking on the tab.</p>
+<p class="has-line-data" data-line-start="11" data-line-end="12">If any explainer (or implementation) availiable in <code>shimex</code> is not visible in the app, you should go back to R and recall the function <code>create_shimex</code> with parametr <code>selected_explainers</code> filled with all desired explainers. All possible choices: c(‘CeterisParibus’, ‘BreakDown’, ‘Shap’, ‘Shap_iml’, ‘Shap_shapper’, ‘LocalModel’, ‘Lime’, ‘Lime_iml’).</p>
+<h4 class="code-line" data-line-start=13 data-line-end=14 ><a id="Have_fun_and_explore_your_model__13"></a>Have fun and explore your model !</h4>
+                        '),  #-- about info
+                   style = 'width:80%%; padding-bottom:30px'),
+                   actionButton('sessionInfo', 'sessionInfo', style = 'position: absolute; left: 40%%;')
+                   ),
 
           %s #---tabs
         )

@@ -5,10 +5,11 @@ output$Shap_iml <- renderUI({
          DALEX::theme_drwhy()
      tags$div(
       tags$div(
-                HTML('SHAP (SHapley Additive exPlanations) presents consistent and locally accurate additive                           feature attribution method based on expectations.
+                HTML('SHAP (SHapley Additive exPlanations) presents how the model response can be decomposed into additive attribution.
+                <br>
                 <a href = "https://pbiecek.github.io/PM_VEE/shapley.html" target="_blank">
                        Read more about <i>SHAP</i></a>'),
-                style = 'font-size: 110%; margin-bottom:25px'
+                id = 's_iml_desc' 
              ),
       tags$div(
       renderPlot(plot(p))

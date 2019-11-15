@@ -13,10 +13,11 @@ output$BreakDown <- renderUI({
   
   tags$div(class='content',
            tags$div(
-              HTML('Break Down Plot shows contributions of every variable to a final prediction.
+              HTML('Break Down Plot shows how the average model response changes when new features are being fixed in the observation of interest.
+              <br>
               <a href =  "https://modeloriented.github.io/iBreakDown/" target="_blank">
                      Read more about <i>BreakDown</i>.</a>'),
-              style = 'font-size: 110%; margin-bottom:25px'),
+              id = 'bd_desc'),
            tags$div(renderPlot(p)),
            tags$div(renderText(d)), 
         style = 'width:80%'

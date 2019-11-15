@@ -4,10 +4,11 @@ output$Shap_shapper <- renderUI({
                                                   new_observation = observation())
    tags$div(
       tags$div(
-                HTML('SHAP (SHapley Additive exPlanations) presents consistent and locally accurate additive                           feature attribution method based on expectations.
+                HTML('SHAP (SHapley Additive exPlanations) presents how the model response can be decomposed into additive attribution.
+                <br>
                 <a href = "https://pbiecek.github.io/PM_VEE/shapley.html" target="_blank">
                        Read more about <i>SHAP</i></a>'),
-                style = 'font-size: 110%; margin-bottom:25px'
+                id = 's_shpr_desc'
              ),
       tags$div(
       renderPlot(plot(shaper))
