@@ -6,7 +6,7 @@ output$Lime <- renderUI({
                            aspects = asp)
     tags$div(
       tags$div(
-                HTML('The key idea behind LIME method is to locally approximate a black-box model by a simpler                         white-box model, which is easier to interpret.
+                HTML('The key idea behind LIME (<em>Local Interpretable Model-Agnostic Explanations</em>) is to locally approximate a black-box model by a simpler                         white-box model, which is easier to interpret. LIME shows sparse explanations for selected aspects.
                 <br>
                 <a href = "https://pbiecek.github.io/PM_VEE/LIME.html" target="_blank">
                        Read more about <i>LIME</i></a>'),

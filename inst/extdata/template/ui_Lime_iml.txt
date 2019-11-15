@@ -2,6 +2,7 @@
 tags$div(
   tags$div(
             HTML('The key idea behind LIME method is to locally approximate a black-box model by a simpler                         white-box model, which is easier to interpret.
+            <br>
             <a href = "https://pbiecek.github.io/PM_VEE/LIME.html" target="_blank">
                    Read more about <i>LIME</i></a>'),
             style = 'font-size: 110%; margin-bottom:25px'

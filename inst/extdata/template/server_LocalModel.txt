@@ -8,6 +8,7 @@ output$LocalModel <- renderUI({
     tags$div(
       tags$div(
                 HTML('Localmodel is a variant of LIME. The key idea behind LIME method is to locally approximate                       a black-box model by a simpler white-box model, which is easier to interpret.
+                <br>
                 <a href = "https://modeloriented.github.io/localModel/" target="_blank">
                        Read more about <i>localmodel</i></a>'),
                  id = 'lm_desc'
